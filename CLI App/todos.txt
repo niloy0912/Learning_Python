@@ -1,9 +1,4 @@
-
-Kill
-Read
-Die
-Study
-Gym
-Die
-Kill
-Test
+item-1
+item-2
+item-4
+item-7

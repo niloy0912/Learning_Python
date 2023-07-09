@@ -10,13 +10,17 @@ while True:
             file = open('todos.txt', 'r')
             todos = file.readlines()
             file.close()
-            todos.append(todo.capitalize())
+
+            todos.append(todo)
             file = open('todos.txt', 'w')
             file.writelines(todos)
             file.close()
         case "show":
             file = open('todos.txt', 'r')
-            print(file.read())
+            todos = file.readlines()
+            new_todos = [item.strip('\n') for item in todos]
+            for index, item in enumerate(new_todos):
+                print(f"{index + 1}. {item}")
             file.close()
         case "edit":
             index = int(input("Enter the index of the todo: "))
