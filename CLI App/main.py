@@ -1,4 +1,4 @@
-todos = []
+# Day 7
 
 while True:
     user_action = input("Enter add, show, edit, complete, or exit: ")
@@ -6,11 +6,18 @@ while True:
 
     match user_action:
         case "add":
-            todo = input("Enter todo: ")
+            todo = input("Enter todo: ") + '\n'
+            file = open('todos.txt', 'r')
+            todos = file.readlines()
+            file.close()
             todos.append(todo.capitalize())
+            file = open('todos.txt', 'w')
+            file.writelines(todos)
+            file.close()
         case "show":
-            for index, item in enumerate(todos):
-                print(f"{index + 1} {item}")
+            file = open('todos.txt', 'r')
+            print(file.read())
+            file.close()
         case "edit":
             index = int(input("Enter the index of the todo: "))
             index = index - 1
