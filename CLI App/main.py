@@ -1,54 +1,50 @@
-# Day 8 - Do the exercise
+# Day 9
 
 while True:
     user_action = input("Enter add, show, edit, complete, or exit: ")
     user_action = user_action.strip()
+    if "add" in user_action:
+        todo = user_action[4:] + '\n'
+        with open('todos.txt', 'r') as file:
+            todos = file.readlines()
+        todos.append(todo.capitalize())
+        with open('todos.txt', 'w') as file:
+            file.writelines(todos)
+        print("Todo Added.")
 
-    match user_action:
-        case "add":
-            todo = input("Enter todo: ") + '\n'
+    elif "show" in user_action:
+        with open('todos.txt', 'r') as file:
+            todos = file.readlines()
+            new_todos = [item.strip('\n') for item in todos]
+            for index, item in enumerate(new_todos):
+                print(f"{index + 1}. {item}")
 
-            with open('todos.txt', 'r') as file:
-                todos = file.readlines()
+    elif "edit" in user_action:
+        index = int(user_action[4:])
+        index = index - 1
 
-            todos.append(todo.capitalize())
+        with open('todos.txt', 'r') as file:
+            todos = file.readlines()
 
-            with open('todos.txt', 'w') as file:
-                file.writelines(todos)
+        new_todo = input("Enter new todo: ")
+        todos[index] = new_todo + '\n'
 
-        case "show":
-            with open('todos.txt', 'r') as file:
-                todos = file.readlines()
-                new_todos = [item.strip('\n') for item in todos]
-                for index, item in enumerate(new_todos):
-                    print(f"{index + 1}. {item}")
+        with open('todos.txt', 'w') as file:
+            file.writelines(todos)
 
-        case "edit":
-            index = int(input("Enter the index of the todo: "))
-            index = index - 1
+        print("List updated.")
+    elif "complete" in user_action:
+        index = int(user_action[9:])
 
-            with open('todos.txt', 'r') as file:
-                todos = file.readlines()
+        with open('todos.txt', 'r') as file:
+            todos = file.readlines()
 
-            new_todo = input("Enter new todo: ")
-            todos[index] = new_todo + '\n'
+        print("Todo completed:", todos.pop(index - 1))
 
-            with open('todos.txt', 'w') as file:
-                file.writelines(todos)
+        with open('todos.txt', 'w') as file:
+            file.writelines(todos)
 
-            print("List updated.")
-        case "complete":
-            index = int(input("Enter the index of the todo to complete: "))
-
-            with open('todos.txt', 'r') as file:
-                todos = file.readlines()
-
-            print("Todo completed:", todos.pop(index - 1))
-
-            with open('todos.txt', 'w') as file:
-                file.writelines(todos)
-
-        case "exit":
-            break
+    elif "exit" in user_action:
+        break
 
 print("Program closed.")

@@ -2,7 +2,7 @@ entries = []
 counter = int(0)
 percentage_of_heads = int(0)
 
-with open("Files/Coinflips.txt", 'w') as file:
+with open("Coinflips.txt", 'w') as file:
     while True:
         entry = input("Throw the coin and enter head o tail: ")
         entries.append(entry)
